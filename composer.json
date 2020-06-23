@@ -1,5 +1,5 @@
 {
-  "name": "scpwiki/Services_JSON",
+  "name": "scpwiki/services_json",
   "description": "Legacy version of PEAR/Services_JSON for Wikijump use.",
   "type": "library",
   "minimum-stability": "dev",
