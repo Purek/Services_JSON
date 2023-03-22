@@ -1,6 +1,6 @@
 {
-  "name": "scpwiki/services_json",
-  "description": "Legacy version of PEAR/Services_JSON for Wikijump use.",
+  "name": "dorayy/services_json",
+  "description": "Legacy version of PEAR/Services_JSON for Wikijump use. php8.1",
   "type": "library",
   "minimum-stability": "dev",
   "license": "BSD-2-Clause",
@@ -14,7 +14,7 @@
   "support": {
     "irc": "irc://irc.synirc.net/site11",
     "issues": "https://scuttle.atlassian.net/browse/HELP",
-    "source": "https://github.com/scpwiki/Services_JSON"
+    "source": "https://github.com/Purek/Services_JSON"
   },
   "autoload": {
     "classmap": ["JSON.php"]
