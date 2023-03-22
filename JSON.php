@@ -129,9 +129,9 @@ class Services_JSON
     *                                   bubble up with an error, so all return values
     *                                   from encode() should be checked with isError()
     */
-    function Services_JSON($use = 0)
+    function Services_JSON($usejson = 0)
     {
-        $this->use = $use;
+        $this->usejson = $usejson;
     }
 
    /**
@@ -407,7 +407,7 @@ class Services_JSON
                 return '{' . join(',', $properties) . '}';
 
             default:
-                return ($this->use & SERVICES_JSON_SUPPRESS_ERRORS)
+                return ($this->usejson & SERVICES_JSON_SUPPRESS_ERRORS)
                     ? 'null'
                     : new Services_JSON_Error(gettype($var)." can not be encoded as JSON string");
         }
@@ -602,13 +602,9 @@ class Services_JSON
                         $stk = array(SERVICES_JSON_IN_ARR);
                         $arr = array();
                     } else {
-                        if ($this->use & SERVICES_JSON_LOOSE_TYPE) {
                             $stk = array(SERVICES_JSON_IN_OBJ);
                             $obj = array();
-                        } else {
-                            $stk = array(SERVICES_JSON_IN_OBJ);
-                            $obj = new stdClass();
-                        }
+
                     }
 
                     array_push($stk, array('what'  => SERVICES_JSON_SLICE,
@@ -658,21 +654,13 @@ class Services_JSON
                                     $key = $this->decode($parts[1]);
                                     $val = $this->decode($parts[2]);
 
-                                    if ($this->use & SERVICES_JSON_LOOSE_TYPE) {
                                         $obj[$key] = $val;
-                                    } else {
-                                        $obj->$key = $val;
-                                    }
                                 } elseif (preg_match('/^\s*(\w+)\s*:\s*(\S.*),?$/Uis', $slice, $parts)) {
                                     // name:value pair, where name is unquoted
                                     $key = $parts[1];
                                     $val = $this->decode($parts[2]);
 
-                                    if ($this->use & SERVICES_JSON_LOOSE_TYPE) {
                                         $obj[$key] = $val;
-                                    } else {
-                                        $obj->$key = $val;
-                                    }
                                 }
 
                             }
